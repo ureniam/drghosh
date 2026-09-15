@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment and secrets
+.env
+.env*.local
+*.pem
+*.key
+
+# System & IDE
+.DS_Store
+.vscode/
+.idea/

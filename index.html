@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডা. দেবব্রত ঘোষ | Nephrologist & Kidney Specialist | Narayanganj</title>
+    <meta name="description" content="ডা. দেবব্রত ঘোষ - নেফ্রোলজিস্ট ও কিডনি রোগ বিশেষজ্ঞ। মেডিনোভা মেডিক্যাল সার্ভিসেস, নারায়ণগঞ্জ। অ্যাপয়েন্টমেন্ট: 01715-318533">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary: #0c4a6e;
+            --primary-light: #0369a1;
+            --accent: #0ea5e9;
+            --accent-light: #7dd3fc;
+            --teal: #0d9488;
+            --gold: #f59e0b;
+            --bg: #f0f9ff;
+            --white: #ffffff;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .nav-container {
+            max-width: 1280px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 2rem; height: 70px;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: var(--primary);
+        }
+        .nav-logo-icon {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 20px;
+        }
+        .nav-logo-text { font-weight: 700; font-size: 1.2rem; line-height: 1.2; }
+        .nav-logo-text span { display: block; font-size: 0.75rem; font-weight: 400; color: var(--gray); }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--dark); font-weight: 500;
+            font-size: 0.95rem; position: relative; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--accent); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white !important; padding: 10px 24px; border-radius: 50px;
+            font-weight: 600; box-shadow: 0 4px 15px rgba(14,165,233,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(14,165,233,0.4); }
+        .nav-cta::after { display: none !important; }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--primary); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; padding-top: 70px;
+            background: linear-gradient(135deg, #0c4a6e 0%, #075985 30%, #0369a1 60%, #0ea5e9 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; right: -30%;
+            width: 80%; height: 200%; border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%);
+        }
+        .hero-pattern {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .hero-container {
+            max-width: 1280px; margin: 0 auto; padding: 4rem 2rem;
+            display: flex; align-items: center; justify-content: space-between;
+            min-height: calc(100vh - 70px); position: relative; z-index: 2;
+        }
+        .hero-content { max-width: 600px; color: white; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1.5rem;
+        }
+        .hero-badge i { color: var(--gold); }
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem; line-height: 1.15; margin-bottom: 0.5rem;
+        }
+        .hero-name-bn {
+            font-size: 2.8rem; font-weight: 700; margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #7dd3fc);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-title {
+            font-size: 1.3rem; color: var(--accent-light);
+            font-weight: 600; margin-bottom: 1rem;
+        }
+        .hero-quals {
+            font-size: 1rem; color: rgba(255,255,255,0.8);
+            line-height: 1.8; margin-bottom: 0.5rem;
+        }
+        .hero-quals strong { color: white; }
+        .hero-stats {
+            display: flex; gap: 2rem; margin: 2rem 0;
+            padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat-num {
+            font-size: 2rem; font-weight: 700;
+            background: linear-gradient(to right, var(--gold), #fbbf24);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+        .hero-btns { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 32px; border-radius: 50px; font-weight: 600;
+            font-size: 1rem; text-decoration: none; transition: all 0.3s;
+            border: none; cursor: pointer; font-family: inherit;
+        }
+        .btn-white {
+            background: white; color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .btn-white:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+        .btn-outline {
+            background: transparent; color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+        .btn-green {
+            background: #25D366; color: white;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+        }
+        .btn-green:hover { transform: translateY(-3px); background: #22c55e; }
+        .hero-image {
+            flex-shrink: 0; position: relative;
+        }
+        .hero-image img {
+            width: 420px; height: auto; border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            border: 4px solid rgba(255,255,255,0.2);
+        }
+        .hero-floating {
+            position: absolute; background: white; border-radius: 16px;
+            padding: 12px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex; align-items: center; gap: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .hero-floating-1 { top: 10%; left: -60px; }
+        .hero-floating-2 { bottom: 15%; right: -50px; animation-delay: 1.5s; }
+        .hero-floating i { font-size: 1.5rem; }
+        .hero-floating span { font-weight: 600; font-size: 0.85rem; color: var(--dark); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section { padding: 5rem 2rem; }
+        .section-container { max-width: 1280px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-tag {
+            display: inline-block; background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white; padding: 6px 18px; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;
+        }
+        .section-title {
+            font-size: 2.2rem; font-weight: 700; color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .section-subtitle { color: var(--gray); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+
+        /* ===== ABOUT ===== */
+        .about { background: white; }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+        .about-image img {
+            width: 100%; border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        .about-content h3 {
+            font-size: 1.8rem; color: var(--primary); margin-bottom: 1rem;
+        }
+        .about-content p { color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; }
+        .credential-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+        .credential-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--bg); padding: 8px 16px; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 500; color: var(--primary);
+            border: 1px solid var(--gray-light);
+        }
+        .credential-tag i { color: var(--accent); }
+        .membership-list { list-style: none; }
+        .membership-list li {
+            padding: 8px 0; display: flex; align-items: center; gap: 10px;
+            color: var(--dark); font-size: 0.95rem;
+        }
+        .membership-list li i {
+            color: var(--teal); font-size: 0.9rem; width: 20px; text-align: center;
+        }
+
+        /* ===== SERVICES ===== */
+        .services { background: var(--bg); }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-card {
+            background: white; border-radius: 16px; padding: 2rem;
+            border: 1px solid var(--gray-light);
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--accent), var(--teal));
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        .service-card:hover::before { opacity: 1; }
+        .service-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(13,148,136,0.1));
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .service-icon i { font-size: 1.5rem; color: var(--accent); }
+        .service-card h3 { font-size: 1.15rem; color: var(--dark); margin-bottom: 0.5rem; }
+        .service-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+
+        /* ===== RESOURCES (Image Gallery) ===== */
+        .resources { background: white; }
+        .resources-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+        }
+        .resource-card {
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s; cursor: pointer; position: relative;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .resource-card img { width: 100%; height: 300px; object-fit: cover; display: block; }
+        .resource-card-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem 1.5rem 1.5rem; color: white;
+        }
+        .resource-card-overlay h4 { font-size: 1rem; margin-bottom: 4px; }
+        .resource-card-overlay p { font-size: 0.8rem; opacity: 0.8; }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+            z-index: 9999; align-items: center; justify-content: center;
+            padding: 2rem;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%; max-height: 90vh; border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute; top: 20px; right: 30px;
+            color: white; font-size: 2rem; cursor: pointer;
+            background: rgba(255,255,255,0.1); width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; transition: background 0.3s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+        /* ===== CHAMBER ===== */
+        .chamber {
+            background: linear-gradient(135deg, var(--primary) 0%, #075985 100%);
+            color: white; position: relative; overflow: hidden;
+        }
+        .chamber::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 50%; height: 100%;
+            background: radial-gradient(ellipse at right, rgba(14,165,233,0.2), transparent);
+        }
+        .chamber-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+            position: relative; z-index: 2;
+        }
+        .chamber-card {
+            background: rgba(255,255,255,0.08); border-radius: 20px;
+            padding: 2.5rem; backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .chamber-card h3 {
+            font-size: 1.5rem; margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .chamber-card h3 i {
+            width: 45px; height: 45px; background: rgba(14,165,233,0.3);
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem;
+        }
+        .chamber-info { list-style: none; }
+        .chamber-info li {
+            padding: 10px 0; display: flex; align-items: flex-start; gap: 12px;
+            font-size: 1rem; color: rgba(255,255,255,0.9); line-height: 1.6;
+        }
+        .chamber-info li i { color: var(--accent-light); margin-top: 4px; width: 20px; }
+        .chamber-highlight {
+            background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);
+            border-radius: 12px; padding: 1rem 1.5rem; margin-top: 1rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .chamber-highlight i { color: var(--gold); font-size: 1.2rem; }
+        .chamber-highlight span { color: rgba(255,255,255,0.9); font-size: 0.9rem; }
+
+        /* ===== CONTACT CTA ===== */
+        .contact-cta {
+            background: white; text-align: center;
+        }
+        .contact-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+            max-width: 900px; margin: 0 auto;
+        }
+        .contact-card {
+            padding: 2rem; border-radius: 16px;
+            border: 2px solid var(--gray-light); transition: all 0.3s;
+        }
+        .contact-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(14,165,233,0.1);
+            transform: translateY(-3px);
+        }
+        .contact-card-icon {
+            width: 60px; height: 60px; border-radius: 50%;
+            margin: 0 auto 1rem; display: flex; align-items: center;
+            justify-content: center; font-size: 1.5rem;
+        }
+        .contact-card h4 { font-size: 1rem; color: var(--gray); margin-bottom: 0.5rem; }
+        .contact-card p { font-size: 1.2rem; font-weight: 700; color: var(--dark); }
+        .contact-card a {
+            text-decoration: none; color: var(--dark);
+        }
+        .contact-card a:hover { color: var(--accent); }
+
+        /* ===== MAP ===== */
+        .map-section { background: var(--bg); }
+        .map-container {
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 400px;
+        }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark); color: rgba(255,255,255,0.6);
+            padding: 3rem 2rem;
+        }
+        .footer-container {
+            max-width: 1280px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a {
+            color: rgba(255,255,255,0.6); text-decoration: none;
+            transition: color 0.3s; font-size: 1.2rem;
+        }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* ===== FLOATING WhatsApp ===== */
+        .whatsapp-float {
+            position: fixed; bottom: 25px; right: 25px; z-index: 999;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: #25D366; color: white; font-size: 2rem;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 25px rgba(37,211,102,0.4);
+            text-decoration: none; transition: all 0.3s;
+            animation: pulse-green 2s infinite;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .nav-links.active {
+                display: flex; flex-direction: column;
+                position: absolute; top: 70px; left: 0; right: 0;
+                background: white; padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            .hero-container { flex-direction: column; text-align: center; padding: 2rem; }
+            .hero-name { font-size: 2.5rem; }
+            .hero-name-bn { font-size: 2rem; }
+            .hero-image { margin-top: 2rem; }
+            .hero-image img { width: 300px; }
+            .hero-floating { display: none; }
+            .hero-stats { justify-content: center; }
+            .hero-btns { justify-content: center; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .resources-grid { grid-template-columns: 1fr 1fr; }
+            .chamber-grid { grid-template-columns: 1fr; }
+            .contact-cards { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 640px) {
+            .hero-name { font-size: 2rem; }
+            .hero-name-bn { font-size: 1.6rem; }
+            .hero-stats { flex-direction: column; gap: 1rem; }
+            .hero-image img { width: 260px; }
+            .resources-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.6rem; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon"><i class="fas fa-stethoscope"></i></div>
+                <div class="nav-logo-text">
+                    Dr. Debabrata Ghosh
+                    <span>Nephrologist & Kidney Specialist</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">পরিচিতি</a></li>
+                <li><a href="#services">সেবাসমূহ</a></li>
+                <li><a href="#resources">রিসোর্স</a></li>
+                <li><a href="#chamber">চেম্বার</a></li>
+                <li><a href="#contact" class="nav-cta"><i class="fas fa-calendar-check"></i> অ্যাপয়েন্টমেন্ট</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-container">
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i> BMDC Reg. No: A-70064
+                </div>
+                <h1 class="hero-name">Dr. Debabrata Ghosh</h1>
+                <h2 class="hero-name-bn">ডা. দেবব্রত ঘোষ</h2>
+                <p class="hero-title">নেফ্রোলজিস্ট ও কিডনি রোগ বিশেষজ্ঞ</p>
+                <p class="hero-quals">
+                    <strong>MBBS</strong> (SHSMC) | <strong>MD</strong> (Nephrology, BMU)<br>
+                    <strong>MACP</strong> | <strong>CCD</strong>
+                </p>
+                <p class="hero-quals" style="font-size:0.9rem;">
+                    সহকারী অধ্যাপক ও পরিচালক (ইনচার্জ)<br>
+                    Institute of Nuclear Medicine & Allied Sciences (INMAS), Gopalganj
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">১৩+</div>
+                        <div class="hero-stat-label">বছরের অভিজ্ঞতা</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">১০০০০+</div>
+                        <div class="hero-stat-label">সুস্থ রোগী</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">৫+</div>
+                        <div class="hero-stat-label">আন্তর্জাতিক সদস্যপদ</div>
+                    </div>
+                </div>
+                <div class="hero-btns">
+                    <a href="tel:01715318533" class="btn btn-white">
+                        <i class="fas fa-phone-alt"></i> সিরিয়াল দিন
+                    </a>
+                    <a href="https://wa.me/8801913119989" target="_blank" class="btn btn-green">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61588853776641" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                <img src="img_poster.jpg" alt="Dr. Debabrata Ghosh">
+                <div class="hero-floating hero-floating-1">
+                    <i class="fas fa-shield-halved" style="color: var(--teal);"></i>
+                    <span>BMDC Verified</span>
+                </div>
+                <div class="hero-floating hero-floating-2">
+                    <i class="fas fa-graduation-cap" style="color: var(--primary);"></i>
+                    <span>MD (Nephrology)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about" id="about">
+        <div class="section-container">
+            <div class="about-grid">
+                <div class="about-image" data-aos="fade-right">
+                    <img src="img_credentials.jpg" alt="Dr. Debabrata Ghosh Credentials">
+                </div>
+                <div class="about-content" data-aos="fade-left">
+                    <div class="section-tag">পরিচিতি</div>
+                    <h3>ডা. দেবব্রত ঘোষ সম্পর্কে</h3>
+                    <p>
+                        ডা. দেবব্রত ঘোষ একজন অভিজ্ঞ নেফ্রোলজিস্ট ও কিডনি রোগ বিশেষজ্ঞ। তিনি ১৩ বছরেরও বেশি সময় ধরে কিডনি রোগ, ডায়ালাইসিস এবং কিডনি ট্রান্সপ্লান্ট-পরবর্তী যত্নে নিবেদিত। বর্তমানে তিনি ইনস্টিটিউট অব নিউক্লিয়ার মেডিসিন অ্যান্ড অ্যালায়েড সায়েন্সেস (INMAS), গোপালগঞ্জ-এ সহকারী অধ্যাপক ও পরিচালক (ইনচার্জ) হিসেবে কর্মরত আছেন।
+                    </p>
+
+                    <h4 style="font-size:1.1rem; color: var(--primary); margin-bottom: 0.75rem;">শিক্ষাগত যোগ্যতা</h4>
+                    <div class="credential-tags">
+                        <span class="credential-tag"><i class="fas fa-graduation-cap"></i> MBBS (SHSMC)</span>
+                        <span class="credential-tag"><i class="fas fa-user-md"></i> MD (Nephrology, BMU)</span>
+                        <span class="credential-tag"><i class="fas fa-certificate"></i> MACP</span>
+                        <span class="credential-tag"><i class="fas fa-certificate"></i> CCD</span>
+                    </div>
+
+                    <h4 style="font-size:1.1rem; color: var(--primary); margin-bottom: 0.75rem;">পেশাগত সদস্যপদ</h4>
+                    <ul class="membership-list">
+                        <li><i class="fas fa-check-circle"></i> International Society of Nephrology (ISN)</li>
+                        <li><i class="fas fa-check-circle"></i> American College of Physicians (ACP)</li>
+                        <li><i class="fas fa-check-circle"></i> Life Fellow, Society of Nuclear Medicine, Bangladesh (SNMB)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section services" id="services">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag">সেবাসমূহ</div>
+                <h2 class="section-title">যেসব রোগের চিকিৎসা ও পরামর্শ দেওয়া হয়</h2>
+                <p class="section-subtitle">আপনার কি কিডনির সমস্যা রয়েছে? সময়মতো বিশেষজ্ঞ চিকিৎসকের পরামর্শ নিন এবং সুস্থ থাকুন।</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon"><i class="fas fa-disease"></i></div>
+                    <h3>দীর্ঘমেয়াদি কিডনি রোগ (CKD)</h3>
+                    <p>Chronic Kidney Disease-এর সকল ধাপে বিশেষজ্ঞ পরামর্শ এবং চিকিৎসা প্রদান।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-vial"></i></div>
+                    <h3>ক্রিয়েটিনিন বৃদ্ধি ও কিডনি ফেইলিউর</h3>
+                    <p>রক্তে ক্রিয়েটিনিন বেড়ে যাওয়া বা eGFR কমে যাওয়ার কারণ নির্ণয় ও চিকিৎসা।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-droplet"></i></div>
+                    <h3>প্রোটিনুরিয়া ও কিডনি ডিসঅর্ডার</h3>
+                    <p>প্রসাবে প্রোটিন বা অ্যালবুমিন নির্গত হওয়ার সমস্যা নিরসন।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon"><i class="fas fa-heart-pulse"></i></div>
+                    <h3>ডায়াবেটিক কিডনি রোগ</h3>
+                    <p>ডায়াবেটিস বা উচ্চ রক্তচাপজনিত কিডনি জটিলতার বিশেষজ্ঞ ব্যবস্থাপনা।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-filter"></i></div>
+                    <h3>ডায়ালাইসিস ম্যানেজমেন্ট (HD/PD)</h3>
+                    <p>হেমোডায়ালাইসিস ও পেরিটোনিয়াল ডায়ালাইসিস-সংক্রান্ত পরামর্শ, ফলোআপ ও ব্যবস্থাপনা।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-hand-holding-medical"></i></div>
+                    <h3>কিডনি ট্রান্সপ্লান্ট পরবর্তী যত্ন</h3>
+                    <p>কিডনি ট্রান্সপ্লান্ট-পরবর্তী ফলোআপ, ওষুধ পরিকল্পনা ও সাপোর্ট।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon"><i class="fas fa-person-walking"></i></div>
+                    <h3>শরীর ফোলা / ইডেমা</h3>
+                    <p>হাত, পা বা মুখ ফুলে যাওয়া — কিডনিজনিত কারণ নির্ণয় ও চিকিৎসা।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-syringe"></i></div>
+                    <h3>AKI ও ইউরেমিয়া</h3>
+                    <p>একিউট কিডনি ইনজুরি (AKI), উচ্চ পটাশিয়াম, ইউরেমিয়ার জরুরি চিকিৎসা।</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-fire-flame-curved"></i></div>
+                    <h3>প্রসাবে জ্বালাপোড়া ও ইনফেকশন</h3>
+                    <p>প্রসাবে জ্বালা/পোড়া, ইনফেকশন, রক্ত যাওয়া বা বার্ বার প্রসাবের সমস্যা।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="section resources" id="resources">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag">স্বাস্থ্য সচেতনতা</div>
+                <h2 class="section-title">কিডনি সম্পর্কে জানুন</h2>
+                <p class="section-subtitle">কিডনি রোগ সম্পর্কে সচেতনতামূলক তথ্য ও গাইড।</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card" data-aos="fade-up" onclick="openLightbox('img_pd.jpg')">
+                    <img src="img_pd.jpg" alt="Peritoneal Dialysis">
+                    <div class="resource-card-overlay">
+                        <h4>পেরিটোনিয়াল ডায়ালাইসিস (PD)</h4>
+                        <p>ঘরে বসেই কিডনির চিকিৎসা</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('img_hemodialysis.jpg')">
+                    <img src="img_hemodialysis.jpg" alt="Hemodialysis">
+                    <div class="resource-card-overlay">
+                        <h4>হেমোডায়ালাইসিস</h4>
+                        <p>কিডনি বিকল রোগীর জীবনরক্ষাকারী চিকিৎসা</p>
+                    </div>
+                </div>
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('img_transplant.jpg')">
+                    <img src="img_transplant.jpg" alt="Kidney Transplant">
+                    <div class="resource-card-overlay">
+                        <h4>কিডনি ট্রান্সপ্লান্ট সচেতনতা</h4>
+                        <p>অঙ্গদান করুন, জীবন বাঁচান</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-close"><i class="fas fa-times"></i></div>
+        <img id="lightboxImg" src="" alt="Resource">
+    </div>
+
+    <!-- Chamber -->
+    <section class="section chamber" id="chamber">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);">চেম্বার তথ্য</div>
+                <h2 class="section-title" style="color: white;">চেম্বারের বিস্তারিত</h2>
+            </div>
+            <div class="chamber-grid">
+                <div class="chamber-card" data-aos="fade-right">
+                    <h3><i class="fas fa-hospital"></i> চেম্বারের ঠিকানা</h3>
+                    <ul class="chamber-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>মেডিনোভা মেডিক্যাল সার্ভিসেস</strong><br>
+                                জাকির সুপার মার্কেট,<br>
+                                ১৪৫ বঙ্গবন্ধু রোড, চাষাড়া,<br>
+                                নারায়ণগঞ্জ - ১৪০০
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="chamber-highlight">
+                        <i class="fas fa-info-circle"></i>
+                        <span>নারায়ণগঞ্জের রোগীদের জন্য নিয়মিত পরামর্শ দিচ্ছেন।</span>
+                    </div>
+                </div>
+                <div class="chamber-card" data-aos="fade-left">
+                    <h3><i class="fas fa-clock"></i> রোগী দেখার সময়</h3>
+                    <ul class="chamber-info">
+                        <li>
+                            <i class="fas fa-calendar-days"></i>
+                            <div>
+                                <strong>মঙ্গলবার থেকে শনিবার</strong><br>
+                                সন্ধ্যা ৬:০০টা – রাত ১০:০০টা
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-ban" style="color: #f87171;"></i>
+                            <span style="color: #fca5a5; font-weight: 600;">শুক্রবার বন্ধ</span>
+                        </li>
+                    </ul>
+                    <div class="chamber-highlight">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>বি.দ্র. অ্যাপয়েন্টমেন্টের জন্য আসার আগে কল করে সময় নিশ্চিত করে নিন।</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section contact-cta" id="contact">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag">যোগাযোগ</div>
+                <h2 class="section-title">সিরিয়ালের জন্য যোগাযোগ করুন</h2>
+                <p class="section-subtitle">অ্যাপয়েন্টমেন্ট নিতে নিচের যেকোনো মাধ্যমে যোগাযোগ করুন।</p>
+            </div>
+            <div class="contact-cards">
+                <a href="tel:01715318533" class="contact-card" data-aos="fade-up">
+                    <div class="contact-card-icon" style="background: #eff6ff; color: var(--primary);">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h4>কল করুন</h4>
+                    <p>01715-318533</p>
+                </a>
+                <a href="tel:+8801913119989" class="contact-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-card-icon" style="background: #f0fdf4; color: var(--teal);">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h4>বিকল্প নম্বর</h4>
+                    <p>+880 1913-119989</p>
+                </a>
+                <a href="https://wa.me/8801913119989" target="_blank" class="contact-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-card-icon" style="background: #ecfdf5; color: #25D366;">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h4>WhatsApp</h4>
+                    <p>মেসেজ করুন</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section class="section map-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag">লোকেশন</div>
+                <h2 class="section-title">আমাদের খুঁজে পান</h2>
+            </div>
+            <div class="map-container" data-aos="fade-up">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3653.233!2d90.502!3d23.623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDM3JzIzLjAiTiA5MMKwMzAnMDcuMiJF!5e0!3m2!1sen!2sbd!4v1" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Dr. Debabrata Ghosh — Kidney Care. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/profile.php?id=61588853776641" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://wa.me/8801913119989" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="tel:01715318533" title="Call">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/8801913119989" target="_blank" class="whatsapp-float" title="WhatsApp-এ মেসেজ পাঠান">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- AOS Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

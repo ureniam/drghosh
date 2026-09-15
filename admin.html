@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Dr. Ghosh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface2: #334155;
+            --border: #475569;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --radius: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', 'Hind Siliguri', sans-serif;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* LOGIN */
+        .login-screen {
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; padding: 2rem;
+        }
+        .login-card {
+            background: var(--surface); border-radius: 20px;
+            padding: 3rem; width: 100%; max-width: 420px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+        }
+        .login-card h1 {
+            text-align: center; margin-bottom: 0.5rem; font-size: 1.5rem;
+        }
+        .login-card p {
+            text-align: center; color: var(--text-muted); margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label {
+            display: block; font-size: 0.85rem; font-weight: 600;
+            color: var(--text-muted); margin-bottom: 0.5rem;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .form-input {
+            width: 100%; padding: 12px 16px; border-radius: 10px;
+            border: 2px solid var(--border); background: var(--bg);
+            color: var(--text); font-size: 1rem; font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus { outline: none; border-color: var(--accent); }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 12px 24px; border-radius: 10px;
+            font-weight: 600; font-size: 0.95rem; cursor: pointer;
+            border: none; transition: all 0.3s; font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--accent); color: white; width: 100%;
+        }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-sm { padding: 8px 16px; font-size: 0.85rem; }
+        .btn-outline {
+            background: transparent; color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover { border-color: var(--text); color: var(--text); }
+
+        /* ADMIN PANEL */
+        .admin-panel { display: none; }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed; left: 0; top: 0; width: 260px; height: 100vh;
+            background: var(--surface); border-right: 1px solid var(--border);
+            padding: 1.5rem; display: flex; flex-direction: column;
+            z-index: 100;
+        }
+        .sidebar-logo {
+            display: flex; align-items: center; gap: 12px;
+            padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .sidebar-logo-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.1rem;
+        }
+        .sidebar-logo-text { font-weight: 700; font-size: 1rem; }
+        .sidebar-logo-text span { display: block; font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+
+        .sidebar-nav { list-style: none; flex: 1; }
+        .sidebar-nav li {
+            margin-bottom: 4px;
+        }
+        .sidebar-nav a {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 14px; border-radius: 10px;
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500; transition: all 0.2s;
+        }
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: rgba(59,130,246,0.1); color: var(--accent);
+        }
+        .sidebar-nav a i { width: 20px; text-align: center; }
+
+        .sidebar-footer {
+            padding-top: 1rem; border-top: 1px solid var(--border);
+        }
+
+        /* Main Content */
+        .main { margin-left: 260px; padding: 2rem; }
+        .main-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2rem;
+        }
+        .main-header h2 { font-size: 1.5rem; }
+
+        /* Cards */
+        .card {
+            background: var(--surface); border-radius: var(--radius);
+            border: 1px solid var(--border); padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1rem; padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .card-header h3 { font-size: 1.1rem; }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .photo-item {
+            position: relative; border-radius: 12px; overflow: hidden;
+            background: var(--bg); border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .photo-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .photo-item img {
+            width: 100%; height: 180px; object-fit: cover; display: block;
+        }
+        .photo-info {
+            padding: 10px 12px;
+        }
+        .photo-info .name {
+            font-size: 0.8rem; font-weight: 600; word-break: break-all;
+            margin-bottom: 4px;
+        }
+        .photo-info .size {
+            font-size: 0.75rem; color: var(--text-muted);
+        }
+        .photo-actions {
+            display: flex; gap: 6px; padding: 0 12px 10px;
+        }
+        .photo-actions button {
+            flex: 1; padding: 6px; border-radius: 8px; border: none;
+            font-size: 0.75rem; cursor: pointer; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .photo-delete {
+            background: rgba(239,68,68,0.15); color: var(--danger);
+        }
+        .photo-delete:hover { background: var(--danger); color: white; }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border); border-radius: var(--radius);
+            padding: 3rem 2rem; text-align: center; cursor: pointer;
+            transition: all 0.3s; margin-bottom: 1.5rem;
+        }
+        .upload-area:hover, .upload-area.dragover {
+            border-color: var(--accent);
+            background: rgba(59,130,246,0.05);
+        }
+        .upload-area i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+        .upload-area h4 { margin-bottom: 0.5rem; }
+        .upload-area p { color: var(--text-muted); font-size: 0.85rem; }
+        .upload-area input[type="file"] { display: none; }
+
+        /* Upload Preview */
+        .upload-preview {
+            display: none; align-items: center; gap: 1rem;
+            background: var(--bg); padding: 1rem; border-radius: 10px;
+            margin-bottom: 1rem; border: 1px solid var(--border);
+        }
+        .upload-preview.active { display: flex; }
+        .upload-preview img {
+            width: 80px; height: 80px; object-fit: cover; border-radius: 8px;
+        }
+        .upload-preview .info { flex: 1; }
+        .upload-preview .info h5 { margin-bottom: 4px; }
+        .upload-preview .info p { color: var(--text-muted); font-size: 0.8rem; }
+
+        /* Data Form */
+        .data-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+        }
+        .data-grid .full-width { grid-column: 1 / -1; }
+
+        /* Toast */
+        .toast-container {
+            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .toast {
+            padding: 12px 20px; border-radius: 10px; font-size: 0.9rem;
+            font-weight: 500; display: flex; align-items: center; gap: 10px;
+            animation: slideIn 0.3s ease; min-width: 280px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .toast-success { background: var(--success); color: white; }
+        .toast-error { background: var(--danger); color: white; }
+        .toast-info { background: var(--accent); color: white; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 50px; font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-online { background: rgba(34,197,94,0.15); color: var(--success); }
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: currentColor; animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Loading */
+        .loading {
+            display: flex; align-items: center; justify-content: center;
+            padding: 3rem; color: var(--text-muted);
+        }
+        .spinner {
+            width: 30px; height: 30px; border: 3px solid var(--border);
+            border-top-color: var(--accent); border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin-right: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .main { margin-left: 0; }
+            .data-grid { grid-template-columns: 1fr; }
+            .photo-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- LOGIN SCREEN -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <div style="width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#8b5cf6);display:inline-flex;align-items:center;justify-content:center;color:white;font-size:1.5rem;">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+            </div>
+            <h1>Admin Login</h1>
+            <p>Access the control panel</p>
+            <form onsubmit="doLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-input" id="loginUser" placeholder="Enter username" autocomplete="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-input" id="loginPass" placeholder="Enter password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <i class="fas fa-right-to-bracket"></i> Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon"><i class="fas fa-gear"></i></div>
+                <div class="sidebar-logo-text">
+                    Admin Panel
+                    <span>Dr. Ghosh Website</span>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active" onclick="showTab('photos')"><i class="fas fa-images"></i> Photos</a></li>
+                <li><a href="#" onclick="showTab('data')"><i class="fas fa-database"></i> Site Data</a></li>
+                <li><a href="#" onclick="showTab('settings')"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="status-badge status-online" style="margin-bottom:1rem;">
+                    <span class="status-dot"></span> Server Online
+                </div>
+                <a href="/" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <i class="fas fa-external-link"></i> View Website
+                </a>
+                <button class="btn btn-outline btn-sm" style="width:100%;" onclick="doLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+
+            <!-- ===== PHOTOS TAB ===== -->
+            <div class="tab-content" id="tab-photos">
+                <div class="main-header">
+                    <h2><i class="fas fa-images" style="color:var(--accent);margin-right:8px;"></i> Photo Manager</h2>
+                    <button class="btn btn-primary btn-sm" onclick="refreshPhotos()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+
+                <!-- Upload Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-cloud-upload-alt" style="color:var(--accent);margin-right:8px;"></i> Upload Photo</h3>
+                    </div>
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                        <h4>Click or Drag & Drop</h4>
+                        <p>JPG, PNG, GIF, WebP — Max 10MB</p>
+                        <input type="file" id="fileInput" accept="image/*" onchange="previewFile(this)">
+                    </div>
+                    <div class="upload-preview" id="uploadPreview">
+                        <img id="previewImg" src="" alt="Preview">
+                        <div class="info">
+                            <h5 id="previewName">filename.jpg</h5>
+                            <p id="previewSize">0 KB</p>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:8px;">
+                            <input type="text" class="form-input" id="customName" placeholder="Custom filename (optional)" style="padding:8px 12px;font-size:0.85rem;">
+                            <button class="btn btn-primary btn-sm" onclick="uploadFile()">
+                                <i class="fas fa-upload"></i> Upload
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photos Grid -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-folder-open" style="color:var(--warning);margin-right:8px;"></i> All Photos</h3>
+                        <span class="status-badge" style="background:rgba(59,130,246,0.15);color:var(--accent);" id="photoCount">0 files</span>
+                    </div>
+                    <div id="photoGrid" class="photo-grid">
+                        <div class="loading"><div class="spinner"></div> Loading photos...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DATA TAB ===== -->
+            <div class="tab-content" id="tab-data" style="display:none;">
+                <div class="main-header">
+                    <h2><i class="fas fa-database" style="color:var(--accent);margin-right:8px;"></i> Site Data Sync</h2>
+                    <button class="btn btn-primary btn-sm" onclick="loadSiteData()">
+                        <i class="fas fa-sync-alt"></i> Sync from Server
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-edit" style="color:var(--success);margin-right:8px;"></i> Edit Website Data</h3>
+                    </div>
+                    <form onsubmit="saveSiteData(event)">
+                        <div class="data-grid" id="dataForm">
+                            <div class="loading"><div class="spinner"></div> Loading data...</div>
+                        </div>
+                        <div style="margin-top:1.5rem;display:flex;gap:1rem;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save & Sync
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="loadSiteData()">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ===== SETTINGS TAB ===== -->
+            <div class="tab-content" id="tab-settings" style="display:none;">
+                <div class="main-header">
+                    <h2><i class="fas fa-cog" style="color:var(--accent);margin-right:8px;"></i> Settings</h2>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-lock" style="color:var(--warning);margin-right:8px;"></i> Change Password</h3>
+                    </div>
+                    <form onsubmit="changePassword(event)" style="max-width:400px;">
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" class="form-input" id="currentPw" required>
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" class="form-input" id="newPw" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" class="form-input" id="confirmPw" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:auto;">
+                            <i class="fas fa-key"></i> Update Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = '/api';
+
+        // ===== TOAST =====
+        function toast(msg, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const t = document.createElement('div');
+            t.className = `toast toast-${type}`;
+            t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> ${msg}`;
+            container.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3000);
+        }
+
+        // ===== AUTH =====
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API}/check-auth`);
+                const data = await res.json();
+                if (data.authenticated) showAdmin();
+            } catch(e) {}
+        }
+
+        async function doLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            btn.innerHTML = '<div class="spinner" style="width:20px;height:20px;margin:0;border-width:2px;"></div> Logging in...';
+            try {
+                const res = await fetch(`${API}/login`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        username: document.getElementById('loginUser').value,
+                        password: document.getElementById('loginPass').value
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    toast('Login successful!', 'success');
+                    showAdmin();
+                } else {
+                    toast(data.message || 'Login failed', 'error');
+                }
+            } catch(e) {
+                toast('Connection error', 'error');
+            }
+            btn.innerHTML = '<i class="fas fa-right-to-bracket"></i> Login';
+        }
+
+        async function doLogout() {
+            await fetch(`${API}/logout`, {method: 'POST'});
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            toast('Logged out', 'info');
+        }
+
+        function showAdmin() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            refreshPhotos();
+            loadSiteData();
+        }
+
+        // ===== TABS =====
+        function showTab(name) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.getElementById(`tab-${name}`).style.display = 'block';
+            document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+            event.target.closest('a').classList.add('active');
+        }
+
+        // ===== PHOTOS =====
+        async function refreshPhotos() {
+            const grid = document.getElementById('photoGrid');
+            grid.innerHTML = '<div class="loading"><div class="spinner"></div> Loading...</div>';
+            try {
+                const res = await fetch(`${API}/photos`);
+                if (res.status === 401) { doLogout(); return; }
+                const photos = await res.json();
+                document.getElementById('photoCount').textContent = `${photos.length} files`;
+
+                if (photos.length === 0) {
+                    grid.innerHTML = '<p style="color:var(--text-muted);padding:2rem;text-align:center;">No photos found</p>';
+                    return;
+                }
+                grid.innerHTML = photos.map(p => `
+                    <div class="photo-item">
+                        <img src="${p.url}" alt="${p.name}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22180%22><rect fill=%22%231e293b%22 width=%22200%22 height=%22180%22/><text fill=%22%2394a3b8%22 font-size=%2214%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22>Image</text></svg>'">
+                        <div class="photo-info">
+                            <div class="name">${p.name}</div>
+                            <div class="size">${formatSize(p.size)}</div>
+                        </div>
+                        <div class="photo-actions">
+                            <button class="photo-delete" onclick="deletePhoto('${p.name}')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch(e) {
+                grid.innerHTML = '<p style="color:var(--danger);padding:2rem;">Error loading photos</p>';
+            }
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+
+        async function deletePhoto(name) {
+            if (!confirm(`"${name}" মুছে ফেলতে চান? এটি আর ফেরত আনা যাবে না।`)) return;
+            try {
+                const res = await fetch(`${API}/photos/${encodeURIComponent(name)}`, {method: 'DELETE'});
+                const data = await res.json();
+                if (data.success) {
+                    toast(`"${name}" deleted`, 'success');
+                    refreshPhotos();
+                } else {
+                    toast(data.error || 'Delete failed', 'error');
+                }
+            } catch(e) {
+                toast('Error deleting file', 'error');
+            }
+        }
+
+        // ===== UPLOAD =====
+        let selectedFile = null;
+
+        function previewFile(input) {
+            const file = input.files[0];
+            if (!file) return;
+            selectedFile = file;
+            document.getElementById('previewImg').src = URL.createObjectURL(file);
+            document.getElementById('previewName').textContent = file.name;
+            document.getElementById('previewSize').textContent = formatSize(file.size);
+            document.getElementById('uploadPreview').classList.add('active');
+        }
+
+        async function uploadFile() {
+            if (!selectedFile) { toast('No file selected', 'error'); return; }
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            const customName = document.getElementById('customName').value.trim();
+            if (customName) formData.append('custom_name', customName);
+
+            try {
+                toast('Uploading...', 'info');
+                const res = await fetch(`${API}/photos/upload`, {
+                    method: 'POST', body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    toast(data.message, 'success');
+                    selectedFile = null;
+                    document.getElementById('fileInput').value = '';
+                    document.getElementById('uploadPreview').classList.remove('active');
+                    document.getElementById('customName').value = '';
+                    refreshPhotos();
+                } else {
+                    toast(data.error || 'Upload failed', 'error');
+                }
+            } catch(e) {
+                toast('Upload error', 'error');
+            }
+        }
+
+        // Drag & Drop
+        const uploadArea = document.getElementById('uploadArea');
+        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                document.getElementById('fileInput').files = e.dataTransfer.files;
+                previewFile(document.getElementById('fileInput'));
+            }
+        });
+
+        // ===== SITE DATA =====
+        const fieldLabels = {
+            doctor_name_en: 'Doctor Name (English)',
+            doctor_name_bn: 'ডাক্তারের নাম (বাংলা)',
+            title_bn: 'পদবি (বাংলা)',
+            qualifications: 'Qualifications',
+            bmdc: 'BMDC Reg. No.',
+            experience: 'অভিজ্ঞতা',
+            position: 'বর্তমান পদ',
+            workplace: 'কর্মস্থল',
+            chamber_name: 'চেম্বারের নাম',
+            chamber_address: 'চেম্বারের ঠিকানা',
+            schedule_days: 'রোগী দেখার দিন',
+            schedule_time: 'রোগী দেখার সময়',
+            closed_day: 'ছুটির দিন',
+            phone_1: 'ফোন নম্বর ১',
+            phone_2: 'ফোন নম্বর ২',
+            whatsapp: 'WhatsApp Number',
+            facebook: 'Facebook URL'
+        };
+
+        async function loadSiteData() {
+            const form = document.getElementById('dataForm');
+            form.innerHTML = '<div class="loading"><div class="spinner"></div> Loading...</div>';
+            try {
+                const res = await fetch(`${API}/data`);
+                if (res.status === 401) { doLogout(); return; }
+                const data = await res.json();
+                let html = '';
+                for (const [key, label] of Object.entries(fieldLabels)) {
+                    const val = data[key] || '';
+                    const isLong = key === 'chamber_address' || key === 'facebook';
+                    html += `
+                        <div class="form-group ${isLong ? 'full-width' : ''}">
+                            <label>${label}</label>
+                            <input type="text" class="form-input" name="${key}" value="${val.replace(/"/g, '&quot;')}">
+                        </div>
+                    `;
+                }
+                form.innerHTML = html;
+                toast('Data synced from server', 'success');
+            } catch(e) {
+                form.innerHTML = '<p style="color:var(--danger);">Error loading data</p>';
+            }
+        }
+
+        async function saveSiteData(e) {
+            e.preventDefault();
+            const inputs = document.querySelectorAll('#dataForm input');
+            const data = {};
+            inputs.forEach(i => { data[i.name] = i.value; });
+
+            try {
+                const res = await fetch(`${API}/data`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                if (result.success) {
+                    toast('Data saved & synced!', 'success');
+                } else {
+                    toast(result.error || 'Save failed', 'error');
+                }
+            } catch(e) {
+                toast('Error saving data', 'error');
+            }
+        }
+
+        // ===== CHANGE PASSWORD =====
+        async function changePassword(e) {
+            e.preventDefault();
+            const newPw = document.getElementById('newPw').value;
+            const confirmPw = document.getElementById('confirmPw').value;
+            if (newPw !== confirmPw) {
+                toast('Passwords do not match', 'error');
+                return;
+            }
+            try {
+                const res = await fetch(`${API}/change-password`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        current_password: document.getElementById('currentPw').value,
+                        new_password: newPw
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    toast('Password changed!', 'success');
+                    document.getElementById('currentPw').value = '';
+                    document.getElementById('newPw').value = '';
+                    document.getElementById('confirmPw').value = '';
+                } else {
+                    toast(data.error || 'Failed', 'error');
+                }
+            } catch(e) {
+                toast('Error', 'error');
+            }
+        }
+
+        // Init
+        checkAuth();
+    </script>
+</body>
+</html>
