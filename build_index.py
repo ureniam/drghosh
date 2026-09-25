@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import os
+
+html_content = """<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -1220,3 +1222,7 @@
     </script>
 </body>
 </html>
+"""
+
+with open('/home/ubuntu/drghosh/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
