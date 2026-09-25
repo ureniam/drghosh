@@ -343,7 +343,7 @@
         /* ===== RESOURCES (Image Gallery) ===== */
         .resources { background: var(--bg); }
         .resources-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
         }
         .resource-card {
             border-radius: 16px; overflow: hidden;
@@ -634,7 +634,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">পরিচিতি</a></li>
                 <li><a href="#services">সেবাসমূহ</a></li>
-                <li><a href="#resources">রিসোর্স</a></li>
+                <li><a href="#resources">গ্যালারি</a></li>
                 <li><a href="#chamber">চেম্বার</a></li>
                 <li><a href="#contact" class="nav-cta"><i class="fas fa-calendar-check"></i> অ্যাপয়েন্টমেন্ট</a></li>
             </ul>
@@ -827,33 +827,108 @@
     </section>
 
     <!-- Resources -->
-    <section class="section resources" id="resources">
+    <section class="section resources" id="resources" style="background: var(--bg);">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
-                <div class="section-tag">স্বাস্থ্য সচেতনতা</div>
-                <h2 class="section-title">কিডনি সম্পর্কে জানুন</h2>
-                <p class="section-subtitle">কিডনি রোগ সম্পর্কে সচেতনতামূলক তথ্য ও গাইড।</p>
+                <div class="section-tag">ফটো গ্যালারি ও সচেতনতা</div>
+                <h2 class="section-title">স্বাস্থ্য সচেতনতা ও গ্যালারি</h2>
+                <p class="section-subtitle">কিডনি রোগ সম্পর্কে সচেতনতামূলক তথ্য, ডায়েট চার্ট, ও ডাক্তার সম্পর্কিত তথ্য।</p>
             </div>
             <div class="resources-grid">
-                <div class="resource-card" data-aos="fade-up" onclick="openLightbox('img_pd.jpg')">
+                <!-- Doctor Professional Poster -->
+                <div class="resource-card" data-aos="fade-up" onclick="openLightbox('gallery/doc_05.jpg')">
+                    <img src="gallery/doc_05.jpg" alt="Dr. Debabrata Ghosh - Professional Profile">
+                    <div class="resource-card-overlay">
+                        <h4>ডাক্তারের পরিচিতি</h4>
+                        <p>আপনার কিডনি, আমাদের অঙ্গীকার</p>
+                    </div>
+                </div>
+                <!-- Kidney Health Awareness -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('gallery/doc_06.jpg')">
+                    <img src="gallery/doc_06.jpg" alt="Kidney Health Awareness">
+                    <div class="resource-card-overlay">
+                        <h4>কিডনি সুস্থ রাখার উপায়</h4>
+                        <p>সচেতনতা, পরীক্ষা, সুরক্ষা, সুস্থ জীবন</p>
+                    </div>
+                </div>
+                <!-- Services List Poster -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('gallery/doc_02.jpg')">
+                    <img src="gallery/doc_02.jpg" alt="Services and Treatments List">
+                    <div class="resource-card-overlay">
+                        <h4>সেবাসমূহের তালিকা</h4>
+                        <p>কিডনি রোগ ও মেডিসিন বিশেষজ্ঞ</p>
+                    </div>
+                </div>
+                <!-- Diet Chart -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="0" onclick="openLightbox('gallery/doc_04.jpg')">
+                    <img src="gallery/doc_04.jpg" alt="Kidney Diet Chart - 40g Protein">
+                    <div class="resource-card-overlay">
+                        <h4>কিডনি রোগীর খাবার তালিকা</h4>
+                        <p>৪০ গ্রাম প্রোটিনের ডায়েট চার্ট</p>
+                    </div>
+                </div>
+                <!-- Peritoneal Dialysis -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('img_pd.jpg')">
                     <img src="img_pd.jpg" alt="Peritoneal Dialysis">
                     <div class="resource-card-overlay">
                         <h4>পেরিটোনিয়াল ডায়ালাইসিস (PD)</h4>
                         <p>ঘরে বসেই কিডনির চিকিৎসা</p>
                     </div>
                 </div>
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('img_hemodialysis.jpg')">
+                <!-- Hemodialysis -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('img_hemodialysis.jpg')">
                     <img src="img_hemodialysis.jpg" alt="Hemodialysis">
                     <div class="resource-card-overlay">
                         <h4>হেমোডায়ালাইসিস</h4>
                         <p>কিডনি বিকল রোগীর জীবনরক্ষাকারী চিকিৎসা</p>
                     </div>
                 </div>
-                <div class="resource-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('img_transplant.jpg')">
+                <!-- Kidney Transplant -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="0" onclick="openLightbox('img_transplant.jpg')">
                     <img src="img_transplant.jpg" alt="Kidney Transplant">
                     <div class="resource-card-overlay">
                         <h4>কিডনি ট্রান্সপ্লান্ট সচেতনতা</h4>
                         <p>অঙ্গদান করুন, জীবন বাঁচান</p>
+                    </div>
+                </div>
+                <!-- Dengue Awareness -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('gallery/doc_07.jpg')">
+                    <img src="gallery/doc_07.jpg" alt="Dengue Awareness">
+                    <div class="resource-card-overlay">
+                        <h4>ডেঙ্গু জ্বর সচেতনতা</h4>
+                        <p>সচেতন থাকুন, নিরাপদ থাকুন</p>
+                    </div>
+                </div>
+                <!-- Dengue Prevention -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('gallery/doc_09.jpg')">
+                    <img src="gallery/doc_09.jpg" alt="Dengue Prevention">
+                    <div class="resource-card-overlay">
+                        <h4>ডেঙ্গু প্রতিরোধে সচেতন হোন</h4>
+                        <p>প্রতিরোধই সর্বোত্তম প্রতিকার</p>
+                    </div>
+                </div>
+                <!-- Visiting Card -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="0" onclick="openLightbox('gallery/doc_03.jpg')">
+                    <img src="gallery/doc_03.jpg" alt="Dr. Ghosh Visiting Card">
+                    <div class="resource-card-overlay">
+                        <h4>ভিজিটিং কার্ড</h4>
+                        <p>সহকারী অধ্যাপক ও পরিচালক</p>
+                    </div>
+                </div>
+                <!-- Billboard -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('gallery/doc_10.jpg')">
+                    <img src="gallery/doc_10.jpg" alt="Dr. Ghosh Billboard">
+                    <div class="resource-card-overlay">
+                        <h4>বিলবোর্ড - নারায়ণগঞ্জ</h4>
+                        <p>এখন নারায়ণগঞ্জে</p>
+                    </div>
+                </div>
+                <!-- Dr. Ghosh Poster -->
+                <div class="resource-card" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('dr_ghosh_poster.jpg')">
+                    <img src="dr_ghosh_poster.jpg" alt="Dr. Ghosh Poster">
+                    <div class="resource-card-overlay">
+                        <h4>ডা. দেবব্রত ঘোষ</h4>
+                        <p>নেফ্রোলজিস্ট ও কিডনি বিশেষজ্ঞ</p>
                     </div>
                 </div>
             </div>
