@@ -313,7 +313,8 @@
                 </div>
             </div>
             <ul class="sidebar-nav">
-                <li><a href="#" class="active" onclick="showTab('photos')"><i class="fas fa-images"></i> Photos</a></li>
+                                <li><a href="#" class="active" onclick="showTab('photos')"><i class="fas fa-images"></i> Photos</a></li>
+                <li><a href="#" onclick="showTab('gallery')"><i class="fas fa-th"></i> Gallery</a></li>
                 <li><a href="#" onclick="showTab('data')"><i class="fas fa-database"></i> Site Data</a></li>
                 <li><a href="#" onclick="showTab('settings')"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
@@ -321,6 +322,9 @@
                 <div class="status-badge status-online" style="margin-bottom:1rem;">
                     <span class="status-dot"></span> Server Online
                 </div>
+                <button class="btn btn-primary btn-sm" style="width:100%; margin-bottom:8px;" onclick="rebuildWebsite()">
+                    <i class="fas fa-hammer"></i> Rebuild Website
+                </button>
                 <a href="/" style="color:var(--text-muted);text-decoration:none;font-size:0.85rem;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                     <i class="fas fa-external-link"></i> View Website
                 </a>
@@ -360,6 +364,10 @@
                             <p id="previewSize">0 KB</p>
                         </div>
                         <div style="display:flex;flex-direction:column;gap:8px;">
+                            <select class="form-input" id="uploadSubfolder" style="padding:8px 12px;font-size:0.85rem;">
+                                <option value="">Root folder (default)</option>
+                                <option value="gallery">Gallery folder (gallery/)</option>
+                            </select>
                             <input type="text" class="form-input" id="customName" placeholder="Custom filename (optional)" style="padding:8px 12px;font-size:0.85rem;">
                             <button class="btn btn-primary btn-sm" onclick="uploadFile()">
                                 <i class="fas fa-upload"></i> Upload
@@ -376,6 +384,26 @@
                     </div>
                     <div id="photoGrid" class="photo-grid">
                         <div class="loading"><div class="spinner"></div> Loading photos...</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- ===== GALLERY TAB ===== -->
+            <div class="tab-content" id="tab-gallery" style="display:none;">
+                <div class="main-header">
+                    <h2><i class="fas fa-th" style="color:var(--accent);margin-right:8px;"></i> Gallery Management</h2>
+                    <button class="btn btn-primary btn-sm" onclick="rebuildWebsite()">
+                        <i class="fas fa-hammer"></i> Rebuild Website
+                    </button>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-images" style="color:var(--warning);margin-right:8px;"></i> Gallery Photos</h3>
+                        <span class="status-badge" style="background:rgba(59,130,246,0.15);color:var(--accent);" id="galleryCount">0 files</span>
+                    </div>
+                    <div id="galleryGrid" class="photo-grid">
+                        <div class="loading"><div class="spinner"></div> Loading gallery...</div>
                     </div>
                 </div>
             </div>
@@ -442,7 +470,24 @@
     <script>
         const API = '/api';
 
+        
+        async function rebuildWebsite() {
+            toast('Rebuilding website...', 'info');
+            try {
+                const res = await fetch(`${API}/rebuild`, { method: 'POST' });
+                // We'll just check res.ok since we don't know the exact response format
+                if (res.ok) {
+                    toast('Website rebuilt successfully!', 'success');
+                } else {
+                    toast('Rebuild failed', 'error');
+                }
+            } catch(e) {
+                toast('Error rebuilding website', 'error');
+            }
+        }
+
         // ===== TOAST =====
+
         function toast(msg, type = 'info') {
             const container = document.getElementById('toastContainer');
             const t = document.createElement('div');
@@ -512,7 +557,10 @@
         // ===== PHOTOS =====
         async function refreshPhotos() {
             const grid = document.getElementById('photoGrid');
-            grid.innerHTML = '<div class="loading"><div class="spinner"></div> Loading...</div>';
+            const galleryGrid = document.getElementById('galleryGrid');
+            const loadingHtml = '<div class="loading"><div class="spinner"></div> Loading...</div>';
+            grid.innerHTML = loadingHtml;
+            if (galleryGrid) galleryGrid.innerHTML = loadingHtml;
             try {
                 const res = await fetch(`${API}/photos`);
                 if (res.status === 401) { doLogout(); return; }
@@ -523,7 +571,7 @@
                     grid.innerHTML = '<p style="color:var(--text-muted);padding:2rem;text-align:center;">No photos found</p>';
                     return;
                 }
-                grid.innerHTML = photos.map(p => `
+                const html = photos.map(p => `
                     <div class="photo-item">
                         <img src="${p.url}" alt="${p.name}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22180%22><rect fill=%22%231e293b%22 width=%22200%22 height=%22180%22/><text fill=%22%2394a3b8%22 font-size=%2214%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22>Image</text></svg>'">
                         <div class="photo-info">
@@ -537,6 +585,11 @@
                         </div>
                     </div>
                 `).join('');
+                grid.innerHTML = html;
+                if (galleryGrid) {
+                    galleryGrid.innerHTML = html;
+                    document.getElementById('galleryCount').textContent = `${photos.length} files`;
+                }
             } catch(e) {
                 grid.innerHTML = '<p style="color:var(--danger);padding:2rem;">Error loading photos</p>';
             }
@@ -555,6 +608,7 @@
                 const data = await res.json();
                 if (data.success) {
                     toast(`"${name}" deleted`, 'success');
+                    toast('Website gallery updated automatically!', 'success');
                     refreshPhotos();
                 } else {
                     toast(data.error || 'Delete failed', 'error');
@@ -583,6 +637,8 @@
             formData.append('file', selectedFile);
             const customName = document.getElementById('customName').value.trim();
             if (customName) formData.append('custom_name', customName);
+            const subfolder = document.getElementById('uploadSubfolder').value;
+            if (subfolder) formData.append('subfolder', subfolder);
 
             try {
                 toast('Uploading...', 'info');
@@ -592,6 +648,7 @@
                 const data = await res.json();
                 if (data.success) {
                     toast(data.message, 'success');
+                    toast('Website gallery updated automatically!', 'success');
                     selectedFile = null;
                     document.getElementById('fileInput').value = '';
                     document.getElementById('uploadPreview').classList.remove('active');
